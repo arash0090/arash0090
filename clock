@@ -1,0 +1,72 @@
+import tkinter as tk
+from datetime import datetime
+
+
+window = tk.Tk()
+window.title("clock")
+
+window.minsize(200, 80)
+
+
+def clock():
+    hours_lbl["text"] = clock_formating(datetime.now().hour)
+    minutes_lbl["text"] = clock_formating(datetime.now().minute)
+    seconds_lbl["text"] = clock_formating(datetime.now().second)
+
+    c_lbl["text"] = clock_date(datetime.now().hour)
+
+    year_lbl["text"] = datetime.now().year
+    month_lbl["text"] = datetime.now().month
+    day_lbl["text"] = datetime.now().day
+
+    window.after(1000, clock)
+
+
+def clock_formating(num):
+    if num < 10:
+        return f"0{num}"
+    else:
+        return num
+
+
+def clock_date(num):
+    if num < 12:
+        return "AM"
+    else:
+        return "PM"
+
+
+font_style = ('None', 20, "bold")
+font_style_date = ('None', 10, "bold")
+
+frm = tk.Frame(master=window)
+hours_lbl = tk.Label(master=frm, text="00", font=font_style)
+a_lbl = tk.Label(master=frm, text=":", font=font_style)
+minutes_lbl = tk.Label(master=frm, text="00", font=font_style)
+b_lbl = tk.Label(master=frm, text=":", font=font_style)
+seconds_lbl = tk.Label(master=frm, text="00", font=font_style)
+c_lbl = tk.Label(master=frm, text="00", font=font_style)
+
+
+year_lbl = tk.Label(master=frm, text="00", font=font_style_date)
+a1_lbl = tk.Label(master=frm, text=":", font=font_style_date)
+month_lbl = tk.Label(master=frm, text="00", font=font_style_date)
+a2_lbl = tk.Label(master=frm, text=":", font=font_style_date)
+day_lbl = tk.Label(master=frm, text="00", font=font_style_date)
+
+hours_lbl.grid(row=0, column=0)
+a_lbl.grid(row=0, column=1)
+minutes_lbl.grid(row=0, column=2)
+b_lbl.grid(row=0, column=3)
+seconds_lbl.grid(row=0, column=4)
+c_lbl.grid(row=0, column=5)
+year_lbl.grid(row=2, column=1)
+a1_lbl.grid(row=2, column=2)
+month_lbl.grid(row=2, column=3)
+a2_lbl.grid(row=2, column=4)
+day_lbl.grid(row=2, column=5)
+
+frm.pack()
+
+clock()
+window.mainloop()
